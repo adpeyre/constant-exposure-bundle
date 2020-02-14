@@ -62,6 +62,16 @@ You can expose your constants on your page:
 ### Composer
 `composer require constant-exposure/constant-exposure-bundle`
 
+### Load the bundle
+In `config/bundles.php`, add this line:
+
+``` php 
+return [
+    ...
+    ConstantExposureBundle\ConstantExposureBundle::class => ['all' => true],
+];
+```
+
 ### Constants to expose
 Create a file `config/packages/constant_exposure.yaml` in your project. Then, configure constants to expose.
 ``` yaml
