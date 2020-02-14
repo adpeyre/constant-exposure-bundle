@@ -1,7 +1,7 @@
 # Constant Exposure Bundle
 
-This Symfony Bundle is usefull if you need to expose constants to front.
-Currently, only class constants and symfony parameters are supported.
+This Symfony Bundle is useful if you need to expose constants to front.
+Currently, class constants and symfony parameters are supported.
 
 ## Example
 
@@ -18,6 +18,8 @@ constant_exposure:
       alias: Normalizer
       constants:
         - DISABLE_TYPE_ENFORCEMENT
+  parameter:
+    - kernel.name  
 ```
 
 You can expose your constants on a route:
@@ -33,6 +35,9 @@ You can expose your constants on a route:
     "Normalizer": {
       "DISABLE_TYPE_ENFORCEMENT": "disable_type_enforcement"
     }
+  },
+  "parameter": {
+    "kernel.name": "myApp"
   }
 }
 ```
@@ -41,9 +46,12 @@ You can expose your constants on your page:
 ``` html
 <script>
     var ConstantExposure = {
-        "class":{
+        "class": {
             "Password":{"EXPIRE_PASSWORD": 86400, "PREFIX": "MY_PREFIX"},
             "Normalizer":{"DISABLE_TYPE_ENFORCEMENT": "disable_type_enforcement"}
+        },
+        "parameter": {
+            "kernel.name": "myApp"
         }
     };
 </script>
@@ -64,6 +72,8 @@ constant_exposure:
             constants:
                 - CONSTANT_1
                 - CONSTANT_2
+    parameter:
+        - kernel.name
 ```
 
 ### Route exposure
