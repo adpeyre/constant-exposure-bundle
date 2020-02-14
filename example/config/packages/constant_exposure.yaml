@@ -9,3 +9,5 @@ constant_exposure:
       alias: Normalizer
       constants:
         - DISABLE_TYPE_ENFORCEMENT
+  parameter:
+    - kernel.name
