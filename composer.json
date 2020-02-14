@@ -1,7 +1,7 @@
 {
     "name": "constant-exposure/constant-exposure-bundle",
     "type": "library",
-    "description": "Expose php constant to front.",
+    "description": "Expose php constants to front.",
     "license": "MIT",
     "autoload": {
         "psr-4": {
