@@ -1,0 +1,31 @@
+parameters:
+  constant.exposure.bundle.name: ConstantExposureBundle
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true
+    public: false
+
+  ConstantExposureBundle\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+  ConstantExposureBundle\Controller\:
+    resource: '../../Controller'
+    public: true
+    tags: ['controller.service_arguments']
+
+  _instanceof:
+    ConstantExposureBundle\Extractor\ExtractorInterface:
+      tags: [{name: 'constant_exposure_bundle.extractor', priority: 1}]
+
+  ConstantExposureBundle\Extractor\Extractor:
+    arguments:
+      $arrayConfiguration: %constant_exposure%
+      $cachePath: '%kernel.cache_dir%/constant_exposure.json'
+      $extractors: !tagged constant_exposure_bundle.extractor
+      $debug: %kernel.debug%
+
+  ConstantExposureBundle\Twig\ConstantExposureTwigExtension:
+    arguments:
+      $defaultObjectName: '%constant.exposure.bundle.name%'

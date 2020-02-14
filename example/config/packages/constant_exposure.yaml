@@ -1,0 +1,11 @@
+constant_exposure:
+  class:
+    App\Entity\Password:
+      alias: Password
+      constants:
+        - EXPIRE_PASSWORD
+        - PREFIX
+    Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer:
+      alias: Normalizer
+      constants:
+        - DISABLE_TYPE_ENFORCEMENT

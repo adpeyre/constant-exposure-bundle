@@ -1,0 +1,28 @@
+{
+    "name": "constant-exposure/constant-exposure-bundle",
+    "type": "library",
+    "description": "Expose php constant to front.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ConstantExposureBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.2",
+        "symfony/cache": "^3.4|^4.0|^5.0",
+        "symfony/serializer": "^3.4|^4.0|^5.0",
+        "symfony/config": "^3.4|^4.0|^5.0",
+        "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+        "symfony/http-foundation": "^3.4|^4.0|^5.0",
+        "symfony/http-kernel": "^3.4|^4.0|^5.0",
+        "symfony/framework-bundle": "^3.4|^4.0|^5.0",
+        "symfony/twig-bundle": "^3.4|^4.0|^5.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan-symfony": "^0.12",
+        "symfony/phpunit-bridge": "^4.4",
+        "phpunit/phpunit": "^8.5",
+        "phake/phake": "@stable"
+    }
+}
