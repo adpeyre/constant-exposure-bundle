@@ -19,7 +19,8 @@ constant_exposure:
       constants:
         - DISABLE_TYPE_ENFORCEMENT
   parameter:
-    - kernel.name  
+    debug: '%kernel.debug%'
+    sentry_dsn: '%env(SENTRY_DSN)%'  
 ```
 
 You can expose your constants on a route:
@@ -37,7 +38,8 @@ You can expose your constants on a route:
     }
   },
   "parameter": {
-    "kernel.name": "myApp"
+    "debug": true,
+    "sentry_dsn": "https://<key>@sentry.io/<project>"
   }
 }
 ```
@@ -51,7 +53,8 @@ You can expose your constants on your page:
             "Normalizer":{"DISABLE_TYPE_ENFORCEMENT": "disable_type_enforcement"}
         },
         "parameter": {
-            "kernel.name": "myApp"
+            "debug": true,
+            "sentry_dsn": "https://<key>@sentry.io/<project>"
         }
     };
 </script>
@@ -83,7 +86,8 @@ constant_exposure:
                 - CONSTANT_1
                 - CONSTANT_2
     parameter:
-        - kernel.name
+        debug: '%kernel.debug%'
+        sentry_dsn: '%env(SENTRY_DSN)%'  
 ```
 
 ### Route exposure

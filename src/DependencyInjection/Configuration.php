@@ -17,9 +17,28 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('parameter')
-                    ->scalarPrototype()
+                    ->beforeNormalization()
+                    ->always()
+                    ->then(function ($v) {
+                        $normalized = [];
+                        foreach ((array)$v as $name => $value) {
+                            $normalized[] = ['name' => $name, 'value' => $value];
+                        }
+
+                        return $normalized;
+                    })
                     ->end()
-            ->end()
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('name')
+                                ->isRequired()
+                                ->end()
+                            ->scalarNode('value')
+                                ->isRequired()
+                                ->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->arrayNode('class')
                     ->beforeNormalization()
                     ->always()

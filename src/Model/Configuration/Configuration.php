@@ -10,7 +10,7 @@ class Configuration
     protected $class;
 
     /**
-     * @var null|string[]
+     * @var null|ParameterConfiguration[]
      */
     protected $parameter;
 
@@ -33,7 +33,7 @@ class Configuration
     }
 
     /**
-     * @return null|string[]
+     * @return null|ParameterConfiguration[]
      */
     public function getParameter(): ?array
     {
@@ -41,7 +41,7 @@ class Configuration
     }
 
     /**
-     * @param null|string[] $parameter
+     * @param null|ParameterConfiguration[] $parameter
      */
     public function setParameter(?array $parameter): Configuration
     {

@@ -7,6 +7,7 @@ use ConstantExposureBundle\Extractor\Extractor;
 use ConstantExposureBundle\Extractor\ParameterExtractor;
 use ConstantExposureBundle\Model\Configuration\ClassConfiguration;
 use ConstantExposureBundle\Model\Configuration\Configuration;
+use ConstantExposureBundle\Model\Configuration\ParameterConfiguration;
 use ConstantExposureBundle\Model\Exposition\Exposition;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -20,15 +21,14 @@ class ParameterExtractorTest extends KernelTestCase
 
     public function testParameter(): void
     {
-        $container = Phake::mock(ContainerInterface::class);
-        Phake::when($container)->getParameter('kernel.name')->thenReturn('my_app');
-
         $configuration = (new Configuration())->setParameter([
-           'kernel.name'
+            (new ParameterConfiguration())
+                ->setName('debug')
+                ->setValue(true),
         ]);
 
         $expectedExposition = (new Exposition())->setParameter([
-           'kernel.name' => 'my_app'
+           'debug' => true
         ]);
 
         $actualExposition = (new ParameterExtractor($container))->run($configuration, new Exposition());
