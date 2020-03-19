@@ -7,30 +7,7 @@ class Exposition
     /**
      * @var array<mixed>
      */
-    protected $class = [];
-
-    /**
-     * @var array<mixed>
-     */
     protected $parameter = [];
-
-    /**
-     * @return array<mixed>
-     */
-    public function getClass(): array
-    {
-        return $this->class;
-    }
-
-    /**
-     * @param array<mixed> $class
-     */
-    public function setClass(array $class): self
-    {
-        $this->class = $class;
-
-        return $this;
-    }
 
     /**
      * @return array<mixed>

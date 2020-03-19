@@ -8,62 +8,40 @@ Currently, class constants and symfony parameters are supported.
 Your yaml configuration file in `config/packages/constant_exposure.yaml`:
 ``` yaml
 constant_exposure:
-  class:
-    App\Entity\Password:
-      alias: Password
-      constants:
-        - EXPIRE_PASSWORD
-        - PREFIX
-    Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer:
-      alias: Normalizer
-      constants:
-        - DISABLE_TYPE_ENFORCEMENT
   parameter:
     debug: '%kernel.debug%'
-    sentry_dsn: '%env(SENTRY_DSN)%'  
+    sentry_dsn: '%env(SENTRY_DSN)%'
+    password_expire: !php/const App\Entity\Password::EXPIRE_PASSWORD
+    normalizer_type_enforcement: !php/const Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT
 ```
 
-You can expose your constants on a route:
-`/js/constant-exposure.json`
+Expose your constants on a route:
+`/js/constant-exposure.json`:
 
 ```json
 {
-  "class": {
-    "Password": {
-      "EXPIRE_PASSWORD": 86400,
-      "PREFIX": "MY_PREFIX"
-    },
-    "Normalizer": {
-      "DISABLE_TYPE_ENFORCEMENT": "disable_type_enforcement"
-    }
-  },
   "parameter": {
     "debug": true,
-    "sentry_dsn": "https://<key>@sentry.io/<project>"
+    "sentry_dsn": "https://<key>@sentry.io/<project>",
+    "password_expire": 86400,
+    "normalizer_type_enforcement": "disable_type_enforcement"
   }
 }
 ```
 
-You can expose your constants on your page:
-``` html
-<script>
-    var ConstantExposure = {
-        "class": {
-            "Password":{"EXPIRE_PASSWORD": 86400, "PREFIX": "MY_PREFIX"},
-            "Normalizer":{"DISABLE_TYPE_ENFORCEMENT": "disable_type_enforcement"}
-        },
-        "parameter": {
-            "debug": true,
-            "sentry_dsn": "https://<key>@sentry.io/<project>"
-        }
-    };
-</script>
+Get your constants in Javascript:
+``` javascript
+// Check if you are in debug mode
+const isDebug = ConstantExpsure.getParameter('debug');
+
+// If sentry_dsn is not defined, default value is an empty string
+const sentryDsn = ConstantExpsure.getParameter('sentry_dsn', '');
 ```
 
 ## Install
 
 ### Composer
-`composer require constant-exposure/constant-exposure-bundle`
+`composer require constant-exposure/constant-exposure-bundle ^2.0` 
 
 ### Load the bundle
 In `config/bundles.php`, add this line:
@@ -79,15 +57,10 @@ return [
 Create a file `config/packages/constant_exposure.yaml` in your project. Then, configure constants to expose.
 ``` yaml
 constant_exposure:
-    class:
-        CLASS_NAME:
-            alias: CLASS_NAME_EXPOSED
-            constants:
-                - CONSTANT_1
-                - CONSTANT_2
     parameter:
         debug: '%kernel.debug%'
-        sentry_dsn: '%env(SENTRY_DSN)%'  
+        sentry_dsn: '%env(SENTRY_DSN)%'
+        password_expire: !php/const App\Entity\Password::EXPIRE_PASSWORD 
 ```
 
 ### Route exposure
@@ -101,4 +74,9 @@ constant_exposure:
 Add the line bellow in your twig template. Pass as parameter a name for your javascript object.
 ``` twig
 {{ constant_exposure_object('ConstantExposure') }}
+```
+
+Get them in Javascript:
+``` javascript
+ConstantExposure.getParameter(PARAMETER_NAME [, DEFAUlT_VALUE = null] );
 ```

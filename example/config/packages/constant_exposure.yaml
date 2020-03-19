@@ -1,13 +1,7 @@
 constant_exposure:
-  class:
-    App\Entity\Password:
-      alias: Password
-      constants:
-        - EXPIRE_PASSWORD
-        - PREFIX
-    Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer:
-      alias: Normalizer
-      constants:
-        - DISABLE_TYPE_ENFORCEMENT
   parameter:
-    - kernel.name
+    debug: '%kernel.debug%'
+    sentry_dsn: '%env(SENTRY_DSN)%'
+    password_expire: !php/const App\Entity\Password::EXPIRE_PASSWORD
+    password_prefix: !php/const App\Entity\Password::PREFIX
+    normalizer_type_enforcement: !php/const Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT
