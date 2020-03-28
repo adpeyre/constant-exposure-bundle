@@ -1,0 +1,13 @@
+<script>
+    var {{ var_name }} = {
+        data: {{ exposed|raw }},
+
+        getParameter: function(paramName, defaultValue = null) {
+            if (paramName in this.data.parameter) {
+                return this.data.parameter[paramName];
+            }
+
+            return defaultValue;
+        }
+    };
+</script>

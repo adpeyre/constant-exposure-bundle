@@ -3,19 +3,12 @@
 namespace ConstantExposureBundle\Extractor;
 
 use ConstantExposureBundle\Model\Configuration\Configuration;
+use ConstantExposureBundle\Model\Configuration\ParameterConfiguration;
 use ConstantExposureBundle\Model\Exposition\Exposition;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 class ParameterExtractor implements ExtractorInterface
 {
-    private $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
     public function run(Configuration $configuration, Exposition $exposition): Exposition
     {
         if (null !== $configuration->getParameter()) {
@@ -26,7 +19,7 @@ class ParameterExtractor implements ExtractorInterface
     }
 
     /**
-     * @param array<string> $parameters
+     * @param ParameterConfiguration[] $parameters
      *
      * @return array<mixed>
      */
@@ -34,9 +27,9 @@ class ParameterExtractor implements ExtractorInterface
     {
         $parametersToExpose = [];
 
-        foreach ($parameters as $parameterName) {
+        foreach ($parameters as $parameter) {
             try {
-                $parametersToExpose[$parameterName] = $this->container->getParameter($parameterName);
+                $parametersToExpose[$parameter->getName()] = $parameter->getValue();
             } catch (InvalidArgumentException $e) {
             }
         }

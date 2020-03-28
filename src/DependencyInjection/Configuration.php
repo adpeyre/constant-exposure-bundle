@@ -17,16 +17,12 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('parameter')
-                    ->scalarPrototype()
-                    ->end()
-            ->end()
-                ->arrayNode('class')
                     ->beforeNormalization()
                     ->always()
                     ->then(function ($v) {
                         $normalized = [];
-                        foreach ((array)$v as $className => $classData) {
-                            $normalized[] = array_merge($classData, ['name' => $className]);
+                        foreach ((array)$v as $name => $value) {
+                            $normalized[] = ['name' => $name, 'value' => $value];
                         }
 
                         return $normalized;
@@ -37,13 +33,12 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('name')
                                 ->isRequired()
                                 ->end()
-                            ->scalarNode('alias')
+                            ->scalarNode('value')
                                 ->isRequired()
                                 ->end()
-                            ->arrayNode('constants')
-                                ->isRequired()
-                                ->scalarPrototype()
-                                ->end();
+                        ->end()
+                    ->end()
+                ->end();
 
         return $treeBuilder;
     }
