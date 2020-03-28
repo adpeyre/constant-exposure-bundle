@@ -1,7 +1,7 @@
 # Constant Exposure Bundle
 
-This Symfony Bundle is useful if you need to expose constants to front.
-Currently, class constants and symfony parameters are supported.
+This Symfony Bundle is usefull if you need to expose constants to front.
+
 
 ## Example
 
