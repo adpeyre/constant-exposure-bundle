@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('name')
                                 ->isRequired()
                                 ->end()
-                            ->scalarNode('value')
+                            ->variableNode('value')
                                 ->isRequired()
                                 ->end()
                         ->end()
