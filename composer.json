@@ -17,8 +17,7 @@
         "symfony/http-foundation": "^3.4|^4.0|^5.0",
         "symfony/http-kernel": "^3.4|^4.0|^5.0",
         "symfony/framework-bundle": "^3.4|^4.0|^5.0",
-        "symfony/twig-bundle": "^3.4|^4.0|^5.0",
-        "symfony/serializer-pack": "^1.0"
+        "symfony/twig-bundle": "^3.4|^4.0|^5.0"
     },
     "require-dev": {
         "phpstan/phpstan-symfony": "^0.12",
