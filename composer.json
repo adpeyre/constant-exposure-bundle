@@ -23,7 +23,6 @@
     "require-dev": {
         "phpstan/phpstan-symfony": "^0.12",
         "symfony/phpunit-bridge": "^4.4",
-        "phpunit/phpunit": "^8.5",
         "phake/phake": "@stable"
     }
 }

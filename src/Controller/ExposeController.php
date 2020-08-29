@@ -2,10 +2,10 @@
 
 namespace ConstantExposureBundle\Controller;
 
+use ConstantExposureBundle\Exception\FormatNotSupported;
 use ConstantExposureBundle\Extractor\Extractor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ExposeController extends AbstractController
 {
@@ -18,11 +18,11 @@ class ExposeController extends AbstractController
 
     public function index(string $_format): Response
     {
-        if ('json' !== $_format) {
-            throw new BadRequestHttpException('This format is not supported');
+        try {
+            $exposition = $this->extractor->extractExposed($_format);
+        } catch (FormatNotSupported $e) {
+            throw $this->createNotFoundException($e->getMessage());
         }
-
-        $exposition = $this->extractor->extractExposed();
 
         return new Response($exposition);
     }
