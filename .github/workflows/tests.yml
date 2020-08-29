@@ -7,5 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v1
-      - uses: chindit/actions-phpunit-symfony@1.0.0
+      - uses: nanasess/setup-php@master
+        with:
+          php-version: '7.2'
+      - run: composer install
+      - run: php vendor/bin/simple-phpunit

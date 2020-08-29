@@ -42,9 +42,9 @@ final class ConstantExposureTwigExtension extends AbstractExtension
 
         $render = $this->twig->render('@ConstantExposure/expose.html.twig', [
             'var_name' => $varName,
-            'exposed'  => $this->extractor->extractExposed(),
+            'exposed'  => $this->extractor->extractExposed(Extractor::FORMAT_JSON),
         ]);
 
-        return preg_replace('/\s\s+/', '', $render);
+        return preg_replace('/\s\s+/', '', $render) ?? '';
     }
 }
