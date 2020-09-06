@@ -21,12 +21,13 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param mixed[] $context
-     * @param mixed   $data
      *
      * @return Configuration
      */
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         $data['parameter'] = $this->denormalizer->denormalize($data['parameter'], ParameterConfiguration::class.'[]', $format, $context);
 
@@ -36,7 +37,10 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
         return $configuration;
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return Configuration::class === $type;
     }
