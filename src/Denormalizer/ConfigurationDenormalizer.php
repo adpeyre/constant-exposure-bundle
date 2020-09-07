@@ -29,10 +29,16 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        $data['parameter'] = $this->denormalizer->denormalize($data['parameter'], ParameterConfiguration::class.'[]', $format, $context);
+        $parameter = [];
+
+        if (isset($data['parameter'])) {
+            $parameter = $this->denormalizer->denormalize($data['parameter'], ParameterConfiguration::class.'[]', $format, $context);
+            unset($data['parameter']);
+        }
 
         /** @var Configuration $configuration */
         $configuration = $this->objectNormalizer->denormalize($data, $type, $format, $context);
+        $configuration->setParameter($parameter);
 
         return $configuration;
     }
