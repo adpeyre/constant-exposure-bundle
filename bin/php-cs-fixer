@@ -1,0 +1,5 @@
+#!/bin/bash
+
+test -f /tmp/php-cs-fixer || wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O /tmp/php-cs-fixer
+chmod +x /tmp/php-cs-fixer
+/tmp/php-cs-fixer fix --config=.php_cs.dist -v --using-cache=no
