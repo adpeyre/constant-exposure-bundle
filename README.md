@@ -3,7 +3,7 @@
 [![Version](https://poser.pugx.org/constant-exposure/constant-exposure-bundle/version)](//packagist.org/packages/constant-exposure/constant-exposure-bundle)
 [![License](https://poser.pugx.org/constant-exposure/constant-exposure-bundle/license)](//packagist.org/packages/constant-exposure/constant-exposure-bundle)
 
-This **Symfony Bundle** is usefull if you need to expose constants to front.
+This **Symfony Bundle** is useful if you need to expose constants to front.
 
 ## Install
 
