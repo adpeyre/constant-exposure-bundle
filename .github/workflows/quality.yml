@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: PHPStan
-        uses: docker://oskarstark/phpstan-ga
+        uses: docker://oskarstark/phpstan-ga:0.12.41
         with:
            args: analyse
 
@@ -18,6 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: PHP-CS-Fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
+        uses: docker://oskarstark/php-cs-fixer-ga:2.16.4.1
         with:
           args: --config=.php_cs.dist --diff --dry-run
