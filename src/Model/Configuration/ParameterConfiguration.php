@@ -10,7 +10,7 @@ class ParameterConfiguration
     protected $name = '';
 
     /**
-     * @var null|int|string
+     * @var null|array<int|string, mixed>|bool|int|string
      */
     protected $value;
 
@@ -27,7 +27,7 @@ class ParameterConfiguration
     }
 
     /**
-     * @return null|int|string
+     * @return null|array<int|string, mixed>|bool|int|string
      */
     public function getValue()
     {
@@ -35,7 +35,7 @@ class ParameterConfiguration
     }
 
     /**
-     * @param null|int|string $value
+     * @param null|array<int|string, mixed>|bool|int|string $value
      *
      * @return $this
      */
