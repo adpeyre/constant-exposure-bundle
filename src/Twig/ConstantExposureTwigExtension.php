@@ -27,7 +27,10 @@ final class ConstantExposureTwigExtension extends AbstractExtension
         $this->twig = $twig;
     }
 
-    public function getFunctions()
+    /**
+     * @return TwigFunction[]
+     */
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('constant_exposure_object', [$this, 'getConstantExposureObject'], ['is_safe' =>  ['html']]),

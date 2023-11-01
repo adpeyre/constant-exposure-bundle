@@ -7,18 +7,10 @@ use ConstantExposureBundle\Model\Configuration\ParameterConfiguration;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
-
-    private $objectNormalizer;
-
-    public function __construct(ObjectNormalizer $objectNormalizer)
-    {
-        $this->objectNormalizer = $objectNormalizer;
-    }
 
     /**
      * {@inheritdoc}
@@ -33,21 +25,32 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
 
         if (isset($data['parameter'])) {
             $parameter = $this->denormalizer->denormalize($data['parameter'], ParameterConfiguration::class.'[]', $format, $context);
-            unset($data['parameter']);
         }
 
-        /** @var Configuration $configuration */
-        $configuration = $this->objectNormalizer->denormalize($data, $type, $format, $context);
+        $configuration = new Configuration();
         $configuration->setParameter($parameter);
 
         return $configuration;
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $context
+     * @param mixed                $data
+     * @param mixed                $type
+     * @param null|mixed           $format
      */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
         return Configuration::class === $type;
+    }
+
+    /**
+     * @return array<string, bool>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            Configuration::class => true,
+        ];
     }
 }
