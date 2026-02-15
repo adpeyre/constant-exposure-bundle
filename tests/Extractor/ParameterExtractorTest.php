@@ -28,4 +28,18 @@ class ParameterExtractorTest extends TestCase
         $actualExposition = (new ParameterExtractor())->run($configuration, new Exposition());
         $this->assertEquals($expectedExposition, $actualExposition);
     }
+
+    public function testMissingParameterKeyLeavesExpositionEmpty(): void
+    {
+        $exposition = (new ParameterExtractor())->run([], new Exposition());
+
+        $this->assertSame([], $exposition->parameter);
+    }
+
+    public function testEmptyParameterArrayLeavesExpositionEmpty(): void
+    {
+        $exposition = (new ParameterExtractor())->run(['parameter' => []], new Exposition());
+
+        $this->assertSame([], $exposition->parameter);
+    }
 }
