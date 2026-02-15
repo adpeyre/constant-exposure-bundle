@@ -3,7 +3,6 @@
 namespace ConstantExposureBundle\Extractor;
 
 use ConstantExposureBundle\Exception\FormatNotSupported;
-use ConstantExposureBundle\Model\Configuration\Configuration;
 use ConstantExposureBundle\Model\Exposition\Exposition;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -43,15 +42,9 @@ class Extractor
             }
         }
 
-        /** @var Configuration $configuration */
-        $configuration = $this->serializer->denormalize(
-            $this->arrayConfiguration,
-            Configuration::class
-        );
-
         $exposition = new Exposition();
         foreach ($this->extractors as $extractor) {
-            $exposition = $extractor->run($configuration, $exposition);
+            $exposition = $extractor->run($this->arrayConfiguration, $exposition);
         }
 
         $expositionSerialized = $this->serializer->serialize($exposition, $format);
