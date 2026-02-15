@@ -19,7 +19,7 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
      *
      * @return Configuration
      */
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $parameter = [];
 
@@ -39,7 +39,7 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
      * @param mixed                $type
      * @param null|mixed           $format
      */
-    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return Configuration::class === $type;
     }

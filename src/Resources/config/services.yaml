@@ -23,7 +23,7 @@ services:
     arguments:
       $arrayConfiguration: '%constant_exposure%'
       $cachePath: '%kernel.cache_dir%/constant_exposure.json'
-      $extractors: !tagged constant_exposure_bundle.extractor
+      $extractors: !tagged_iterator constant_exposure_bundle.extractor
       $debug: '%kernel.debug%'
 
   ConstantExposureBundle\Twig\ConstantExposureTwigExtension:

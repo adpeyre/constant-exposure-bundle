@@ -3,7 +3,6 @@
 namespace ConstantExposureBundle\Twig;
 
 use ConstantExposureBundle\Extractor\Extractor;
-use Symfony\Component\Serializer\SerializerInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

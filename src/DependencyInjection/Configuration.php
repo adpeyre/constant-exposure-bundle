@@ -12,7 +12,7 @@ class Configuration implements ConfigurationInterface
         $rootName = 'constant_exposure';
 
         $treeBuilder = new TreeBuilder($rootName);
-        $rootNode = method_exists($treeBuilder, 'getRootNode') ? $treeBuilder->getRootNode() : $treeBuilder->root($rootName);
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
