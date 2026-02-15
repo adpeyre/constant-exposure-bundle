@@ -21,6 +21,14 @@ class ExposeController extends AbstractController
             throw $this->createNotFoundException($e->getMessage());
         }
 
-        return new Response($exposition);
+        $mimeTypes = [
+            'json' => 'application/json',
+            'xml' => 'application/xml',
+            'csv' => 'text/csv',
+        ];
+
+        return new Response($exposition, Response::HTTP_OK, [
+            'Content-Type' => $mimeTypes[$_format] ?? 'text/plain',
+        ]);
     }
 }
