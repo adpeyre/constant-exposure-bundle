@@ -28,7 +28,7 @@ class ConfigurationDenormalizer implements DenormalizerInterface, DenormalizerAw
         }
 
         $configuration = new Configuration();
-        $configuration->setParameter($parameter);
+        $configuration->parameter = $parameter;
 
         return $configuration;
     }

@@ -9,11 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ExposeController extends AbstractController
 {
-    private $extractor;
-
-    public function __construct(Extractor $extractor)
+    public function __construct(private Extractor $extractor)
     {
-        $this->extractor = $extractor;
     }
 
     public function index(string $_format): Response

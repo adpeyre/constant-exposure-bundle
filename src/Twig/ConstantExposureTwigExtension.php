@@ -9,21 +9,11 @@ use Twig\TwigFunction;
 
 final class ConstantExposureTwigExtension extends AbstractExtension
 {
-    private $extractor;
-    private $serializer;
-    private $defaultObjectName;
-    private $twig;
-
     public function __construct(
-        Extractor $extractor,
-        SerializerInterface $serializer,
-        string $defaultObjectName,
-        Environment $twig
+        private Extractor $extractor,
+        private string $defaultObjectName,
+        private Environment $twig,
     ) {
-        $this->extractor = $extractor;
-        $this->serializer = $serializer;
-        $this->defaultObjectName = $defaultObjectName;
-        $this->twig = $twig;
     }
 
     /**

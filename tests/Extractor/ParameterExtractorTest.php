@@ -23,23 +23,27 @@ class ParameterExtractorTest extends KernelTestCase
     {
         $container = Phake::mock(ContainerInterface::class);
 
-        $configuration = (new Configuration())->setParameter([
-            (new ParameterConfiguration())
-                ->setName('debug')
-                ->setValue(true),
-            (new ParameterConfiguration())
-                ->setName('array')
-                ->setValue(['value1', 'value2']),
-            (new ParameterConfiguration())
-                ->setName('assoc')
-                ->setValue(['key1' => 'value1', 'key2' => 'value2']),
-        ]);
+        $debug = new ParameterConfiguration();
+        $debug->name = 'debug';
+        $debug->value = true;
 
-        $expectedExposition = (new Exposition())->setParameter([
+        $array = new ParameterConfiguration();
+        $array->name = 'array';
+        $array->value = ['value1', 'value2'];
+
+        $assoc = new ParameterConfiguration();
+        $assoc->name = 'assoc';
+        $assoc->value = ['key1' => 'value1', 'key2' => 'value2'];
+
+        $configuration = new Configuration();
+        $configuration->parameter = [$debug, $array, $assoc];
+
+        $expectedExposition = new Exposition();
+        $expectedExposition->parameter = [
            'debug' => true,
             'array' => ['value1', 'value2'],
             'assoc' => ['key1' => 'value1', 'key2' => 'value2'],
-        ]);
+        ];
 
         $actualExposition = (new ParameterExtractor($container))->run($configuration, new Exposition());
         $this->assertEquals($expectedExposition, $actualExposition);

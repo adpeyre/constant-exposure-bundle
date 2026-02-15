@@ -11,8 +11,8 @@ class ParameterExtractor implements ExtractorInterface
 {
     public function run(Configuration $configuration, Exposition $exposition): Exposition
     {
-        if (null !== $configuration->getParameter()) {
-            $exposition->setParameter($this->extractor($configuration->getParameter()));
+        if (null !== $configuration->parameter) {
+            $exposition->parameter = $this->extractor($configuration->parameter);
         }
 
         return $exposition;
@@ -29,7 +29,7 @@ class ParameterExtractor implements ExtractorInterface
 
         foreach ($parameters as $parameter) {
             try {
-                $parametersToExpose[$parameter->getName()] = $parameter->getValue();
+                $parametersToExpose[$parameter->name] = $parameter->value;
             } catch (InvalidArgumentException $e) {
             }
         }

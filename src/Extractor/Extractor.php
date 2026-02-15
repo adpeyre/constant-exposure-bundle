@@ -6,7 +6,6 @@ use ConstantExposureBundle\Exception\FormatNotSupported;
 use ConstantExposureBundle\Model\Configuration\Configuration;
 use ConstantExposureBundle\Model\Exposition\Exposition;
 use Symfony\Component\Config\ConfigCache;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class Extractor
@@ -15,29 +14,17 @@ class Extractor
     public const FORMAT_XML = 'xml';
     public const FORMAT_CSV = 'csv';
 
-    private $arrayConfiguration;
-    private $cachePath;
-    private $serializer;
-    private $debug;
-    private $extractors;
-
     /**
-     * @param Serializer                   $serializer
-     * @param array<mixed>                 $arrayConfiguration
      * @param iterable<ExtractorInterface> $extractors
+     * @param array<mixed>                 $arrayConfiguration
      */
     public function __construct(
-        SerializerInterface $serializer,
-        iterable $extractors,
-        array $arrayConfiguration,
-        string $cachePath,
-        bool $debug = false
+        private SerializerInterface $serializer,
+        private iterable $extractors,
+        private array $arrayConfiguration,
+        private string $cachePath,
+        private bool $debug = false,
     ) {
-        $this->cachePath = $cachePath;
-        $this->arrayConfiguration = $arrayConfiguration;
-        $this->serializer = $serializer;
-        $this->debug = $debug;
-        $this->extractors = $extractors;
     }
 
     public function extractExposed(string $format): string
